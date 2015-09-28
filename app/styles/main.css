@@ -5,6 +5,10 @@
   padding: 0.2em 0;
 }
 
+.linkInfo p {
+  font-size: 10px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
