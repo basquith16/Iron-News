@@ -1,25 +1,22 @@
-// $(document).ready(function() {
-//
-// });
+$(document).ready(function() {
 
-API_ROOT = "https://iron-news.herokuapp.com/articles/";
-
+});
 _.templateSettings = {
   interpolate: /\{\{(.+?)\}\}/g
 };
 
 var Article = Backbone.Model.extend({
   url: function() {
-    return API_ROOT + this.get('id');
+    return "https://iron-news.herokuapp.com/articles/" + this.get('id');
 
-    article.fetch().then(function() {
-      console.log(article.get(model.get()))
-    })
+    // article.fetch().then(function() {
+    //   console.log(article.get(model.get()))
+    // })
   }
 })
 
 var Articles = Backbone.Collection.extend({
-  url: API_ROOT,
+  url: "https://iron-news.herokuapp.com/articles/",
   model: Article
 })
 
@@ -33,24 +30,15 @@ articles.fetch().then(function() {
   })
 })
 
-var NavView = Backbone.View.extend({
-  template: _.template($('#navTemplate').text()),
 
-  render: function() {
-    $('nav li', this.$el).removeClass('active');
-
-    return this.$el.html(this.template(this.model.attributes));
-  }
-});
 
 var ArticleView = Backbone.View.extend({
   home: function() {
     var collection = new Articles();
-    // this.$el.html($('#articleTemplate').text());
     $('ul').empty();
     collection.fetch().then(function() {
-      _.each(this.articles, function(article) {
-        $('ol').append('<li><a href="#' + article.get('id') +
+      _.each(collection.articles, function(article) {
+        $('ul').append('<li><a href="#' + this.get('id') +
           '/comments>"</li>');
       });
     });
@@ -63,7 +51,6 @@ var ArticleView = Backbone.View.extend({
     $('ul').empty();
 
     article.fetch().then(function() {
-      // equivalent of rendering a view instead
       _.each(article.get('comments'), function(comment) {
         $('ul').append('<li>' + comment.message + '</li>');
       });
@@ -71,35 +58,6 @@ var ArticleView = Backbone.View.extend({
   }
 });
 
-var Article = Backbone.Model.extend({
-  url: function() {
-    return 'http://iron-news.herokuapp.com/articles/' + this.get('id');
-  }
-});
-
-var ArticleCollection = Backbone.Collection.extend({
-  url: 'http://iron-news.herokuapp.com/articles',
-  model: Article
-});
-// }.bind(this));
-//
-// return this.$el.html(rendered);
-//   },
-//   initialize: function(options) {
-//     this.articles = options.articles;
-//   },
-//
-//   initialize: function() {
-//     this.listenTo(this.model, 'change', this.render);
-//   },
-//
-//   addAll: function() {
-//     articles.each(this.addOne, this);
-//   }
-//
-// });
-
-$(this).navView = new NavView();
 $(this).articles = new ArticleView();
 
 
