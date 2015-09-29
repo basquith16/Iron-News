@@ -9,14 +9,11 @@ var Article = Backbone.Model.extend({
   url: function() {
     return "https://iron-news.herokuapp.com/articles/" + this.get('id');
 
-    // article.fetch().then(function() {
-    //   console.log(article.get(model.get()))
-    // })
   }
-})
+});
 
 var Articles = Backbone.Collection.extend({
-  url: "https://iron-news.herokuapp.com/articles/",
+  url: "https://iron-news.herokuapp.com/articles",
   model: Article
 })
 
@@ -30,37 +27,43 @@ articles.fetch().then(function() {
   })
 })
 
+var LineView = Backbone.View.extend({
+  tagName: 'li',
+  template: _.template($('#lineTemplate').text()),
 
-
-var ArticleView = Backbone.View.extend({
-  home: function() {
-    var collection = new Articles();
-    $('ul').empty();
-    collection.fetch().then(function() {
-      _.each(collection.articles, function(article) {
-        $('ul').append('<li><a href="#' + this.get('id') +
-          '/comments>"</li>');
-      });
-    });
-  },
-
-  comments: function(article_id) {
-    var article = new Article({
-      id: article_id
-    });
-    $('ul').empty();
-
-    article.fetch().then(function() {
-      _.each(article.get('comments'), function(comment) {
-        $('ul').append('<li>' + comment.message + '</li>');
-      });
-    });
+  render: function() {
+    this.$el.html(this.template(this.model.attributes));
+    return this.$el;
   }
 });
 
-$(this).articles = new ArticleView();
+var PageView = Backbone.View.extend({
+  tagName: 'ol',
 
+  render: function() {
+    var self = this;
+    this.collection.each(function(article) {
+      var view = new Lineview({
+        model: article
+      });
+      self.$el.append(view.render());
+    })
+    return this.$el;
+  }
+});
 
+var CommentsView = Backbone.View.extend({
+  tagName: 'ul',
+  template: _.template($('#commentsTemplate').text()),
+
+  render: function() {
+    var self = this;
+    _each(this.model.get('comments'), function(comment) {
+      self.$el.append(self.template(comment));
+    })
+    return this.$el;
+  }
+});
 
 //search stuff if I get there . . .
 // $(function() {

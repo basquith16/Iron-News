@@ -6,19 +6,9 @@ var Router = Backbone.Router.extend({
   },
 
   index: function() {
-    var articles = new ArticleCollection();
-    $('ul').empty();
-    collection.fetch().then(function() {
-      _.each(collection.models, function(article) {
-        $('ul').append(
-          '<li><a href="#' + article.get('id') + '/comments">' +
-          article.get('title') + '</a></li>'
-        );
-      });
-    });
-    $.ajax('article.html').then(function(page) {
-      $('.content').html(page);
-
+    var self = this;
+    this.articles.fetch().then(function() {
+      $('.jumbotron').html(self.pageView.render())
     });
   },
 
@@ -26,19 +16,19 @@ var Router = Backbone.Router.extend({
     var article = new Article({
       id: articleId
     });
-    $('ul').empty();
-
     article.fetch().then(function() {
-      _.each(article.get('comments'), function(comment) {
-        $('ul').append('<li>' + comment.message + '</li>');
+      var view = new CommentsView({
+        model: article
       });
-    });
-    $.ajax('comments.html').then(function(page) {
-      $('.content').html(page)
-    });
+      $('.jumbotron').html(view.render());
+    })
   },
 
   initialize: function() {
+    this.articles = new Articles();
+    this.pageView = new PageView({
+      collection: this.articles
+    })
     Backbone.history.start();
   }
 });
