@@ -1,6 +1,3 @@
-$(document).ready(function() {
-
-});
 _.templateSettings = {
   interpolate: /\{\{(.+?)\}\}/g
 };
@@ -8,7 +5,6 @@ _.templateSettings = {
 var Article = Backbone.Model.extend({
   url: function() {
     return "https://iron-news.herokuapp.com/articles/" + this.get('id');
-
   }
 });
 
@@ -17,15 +13,14 @@ var Articles = Backbone.Collection.extend({
   model: Article
 })
 
-var articles = new Articles();
-
-articles.fetch().then(function() {
-  _.each(articles.models, function(article) {
-    article.fetch().then(function() {
-      console.log(article.get('title'))
-    })
-  })
-})
+// var articles = new Articles();
+// articles.fetch().then(function() {
+//   _.each(articles.models, function(article) {
+//     article.fetch().then(function() {
+//       console.log(article.get('title'))
+//     })
+//   })
+// })
 
 var LineView = Backbone.View.extend({
   tagName: 'li',
@@ -43,7 +38,7 @@ var PageView = Backbone.View.extend({
   render: function() {
     var self = this;
     this.collection.each(function(article) {
-      var view = new Lineview({
+      var view = new LineView({
         model: article
       });
       self.$el.append(view.render());
@@ -61,9 +56,10 @@ var CommentsView = Backbone.View.extend({
     _each(this.model.get('comments'), function(comment) {
       self.$el.append(self.template(comment));
     })
-    return this.$el;
+    return self.$el;
   }
 });
+
 
 //search stuff if I get there . . .
 // $(function() {

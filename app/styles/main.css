@@ -1,3 +1,23 @@
+.content {
+  font-family: Myriad Pro;
+  background-color: rgba(31, 31, 46, .4);
+  padding-top: 25px;
+  color: white;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.timeCreated, .submitter {
+  margin-left: 15px;
+  margin-bottom: 10px;
+}
+
+
+.articleDetails {
+  display: flex;
+  flex-direction: row;
+}
+
 .browserupgrade {
   margin: 0.2em 0;
   background: #ccc;

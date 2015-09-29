@@ -1,14 +1,14 @@
 var Router = Backbone.Router.extend({
 
   routes: {
-    " ": "index",
+    "": "index",
     ":articleId/comments": "comments"
   },
 
   index: function() {
     var self = this;
     this.articles.fetch().then(function() {
-      $('.jumbotron').html(self.pageView.render())
+      $('.content').html(self.pageView.render())
     });
   },
 
@@ -16,16 +16,18 @@ var Router = Backbone.Router.extend({
     var article = new Article({
       id: articleId
     });
-    article.fetch().then(function() {
+    this.article.fetch().then(function() {
       var view = new CommentsView({
         model: article
       });
-      $('.jumbotron').html(view.render());
+      $('comments').html(view.render());
     })
   },
 
   initialize: function() {
+
     this.articles = new Articles();
+    this.commentsView = new CommentsView();
     this.pageView = new PageView({
       collection: this.articles
     })
