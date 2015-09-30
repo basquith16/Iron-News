@@ -1,0 +1,64 @@
+Add comment
+
+in commentsView
+
+get events() {
+return {
+  "submit form.newComment": "createComment"
+}
+}
+
+createComment(event) {
+  event.preventDefault;
+
+  let form = $(event.target)
+
+  message: $('textarea[name=message]'), form),val(),
+  name: $('[name=name]'), form),val()
+
+  };
+
+  if(message.length > 0 && name.length > 0) {
+  this.model.createComment(comment).then(function () {
+  $('ul', self.$el).prepend'<li>
+  <div class="message">$(message)</div>
+  <div class="name">$(name)</div>
+  });
+
+  event.target.reset();
+    }
+  }
+
+
+
+
+  IN MAIN.JS
+
+  createComment(message, name) {
+  return $.post(
+  this.url + '/comments', {
+  article_id: this.get('id'),
+  message: message,
+  name: name
+  }
+  )
+  }
+
+
+
+$new Date(created_at)
+
+moment.js
+
+get timeAgo() {
+return moment(this.model.get(created_at)fromNow();}
+}
+
+serialize() {
+var json = this.toJSON();
+json.timeAgo = this.timeAgo;
+return json.
+}
+
+  <time> will automatically update time (minute ago, hour ago, etc) if you
+  use jquery to search and update them.

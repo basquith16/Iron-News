@@ -18,9 +18,8 @@
     <div class="container">
       <header>
         <img class="logo" src="ironyardLogo.png"/>
-        <ul class="nav nav-pills pull-right" style="justify-content: center;">
-          <li><a href=" " style="margin-right: -25px;">Home</a></li>
-          <li><a href="#comments">| Comments</a></li>
+        <ul class="nav nav-pills pull-right" style= "display: flex; justify-content: flex-start">
+          <li><a href=" " style="margin-left: -175px">Home</a></li>
         </ul>
         <h3 class="text-muted">IronNews</h3>
       </header>
@@ -36,12 +35,12 @@
 
     <script type="text/template" id="lineTemplate">
       <div class="articleHead">
-        <div class="title">{{ title }}</div>
+        <div class="title"><a href='{{url}}' target='_b'>{{ title }}</div></a>
       </div>
       <div class="articleDetails">
         <div class="numberVotes">Votes: {{comments_count }}</div>
         <div class="submitter">Submitted By:{{ submitter }}</div>
-        <div class="timeCreated">| <a href="#comments" style="text-decoration: none; color: white;">comments</a></div>
+        <div class="timeCreated">| <a href="#{{ id }}/comments" style="text-decoration: none; color: white;">comments</a></div>
       </div>
     </script>
     <script type="text/template" id="commentsTemplate">

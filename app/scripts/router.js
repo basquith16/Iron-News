@@ -2,7 +2,7 @@ var Router = Backbone.Router.extend({
 
   routes: {
     "": "index",
-    ":articleId/comments": "comments"
+    ":id/comments": "comments"
   },
 
   index: function() {
@@ -16,11 +16,12 @@ var Router = Backbone.Router.extend({
     var article = new Article({
       id: articleId
     });
-    this.article.fetch().then(function() {
+
+    article.fetch().then(function() {
       var view = new CommentsView({
         model: article
       });
-      $('comments').html(view.render());
+      $('.content').html(view.render());
     })
   },
 

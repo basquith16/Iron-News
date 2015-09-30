@@ -9,18 +9,9 @@ var Article = Backbone.Model.extend({
 });
 
 var Articles = Backbone.Collection.extend({
-  url: "https://iron-news.herokuapp.com/articles",
+  url: "https://iron-news.herokuapp.com/articles/",
   model: Article
 })
-
-// var articles = new Articles();
-// articles.fetch().then(function() {
-//   _.each(articles.models, function(article) {
-//     article.fetch().then(function() {
-//       console.log(article.get('title'))
-//     })
-//   })
-// })
 
 var LineView = Backbone.View.extend({
   tagName: 'li',
@@ -53,7 +44,7 @@ var CommentsView = Backbone.View.extend({
 
   render: function() {
     var self = this;
-    _each(this.model.get('comments'), function(comment) {
+    _.each(this.model.get('comments'), function(comment) {
       self.$el.append(self.template(comment));
     })
     return self.$el;
