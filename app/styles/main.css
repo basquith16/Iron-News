@@ -71,6 +71,32 @@ body {
   padding-right: 15px;
 }
 
+#upvote {
+  background-image: url('/images/upvote.png');
+  height: 12px;
+  width:5px;
+}
+
+#downvote {
+  background-image: url('/images/downvote.png');
+  height: 12px;
+  width: 10px;
+}
+
+#upform {
+  margin-top: -10px;
+}
+
+#downform {
+  margin-top: -10px;
+}
+
+#voting {
+  width: 10px;
+  height: 20px;
+  margin-left: 5px;
+}
+
 .articles {
   font-size: 11px;
   text-align: left;

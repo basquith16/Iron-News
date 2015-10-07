@@ -39,6 +39,14 @@
       </div>
       <div class="articleDetails">
         <div class="numberVotes">Votes: {{comments_count }}</div>
+        <div id="voting">
+          <form class="input" id="upform">
+            <button id="upvote" type="submit" value="Submit"></button>
+          </form>
+          <form class="input" id="downform">
+            <button id="downvote" type="submit" value="Submit"></button>
+          </form>
+        </div>
         <div class="submitter">Submitted By:{{ submitter }}</div>
         <div class="timeCreated">| <a href="#{{ id }}/comments" style="text-decoration: none; color: white;">comments</a></div>
       </div>
