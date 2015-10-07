@@ -51,17 +51,7 @@ var CommentsView = Backbone.View.extend({
   }
 });
 
+$('#upvote').click(function() {
+  comments_count += 1;
 
-//search stuff if I get there . . .
-// $(function() {
-//   var router = new Router();
-//   $(document).on('change', 'form.search input[type=search]', function(event) {
-//     router.navigate('#' + $(this).val(), {
-//       trigger: true
-//     });
-//   });
-//
-//   $(document).on('submit', 'form.search', function(event) {
-//     event.preventDefault();
-//   });
-// });
+});
